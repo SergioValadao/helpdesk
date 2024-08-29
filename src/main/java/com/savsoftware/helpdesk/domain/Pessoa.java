@@ -23,6 +23,7 @@ import jakarta.persistence.Id;
 public abstract class Pessoa implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Integer id;
@@ -40,7 +41,7 @@ public abstract class Pessoa implements Serializable {
 	protected Set<Integer> perfis = new HashSet<>();
 	
 	@JsonFormat(pattern = "dd/MM/yyyy")
-	protected LocalDate data = LocalDate.now();
+	protected LocalDate dataCriacao = LocalDate.now();
 	
 	public Pessoa() {
 		super();
@@ -104,12 +105,12 @@ public abstract class Pessoa implements Serializable {
 		this.perfis.add(perfis.getCodigo());
 	}
 
-	public LocalDate getData() {
-		return data;
+	public LocalDate getDataCriacao() {
+		return dataCriacao;
 	}
 
-	public void setData(LocalDate data) {
-		this.data = data;
+	public void setDataCriacao(LocalDate data) {
+		this.dataCriacao = data;
 	}
 
 	@Override

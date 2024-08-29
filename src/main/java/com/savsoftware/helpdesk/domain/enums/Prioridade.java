@@ -2,7 +2,7 @@ package com.savsoftware.helpdesk.domain.enums;
 
 public enum Prioridade {
 	
-	BAIXA(0, "BAIXA"), CLIENTE(1, "ROLE_CLIENTE"), TECNICO(2, "ROLE_TECNICO");
+	BAIXA(0, "BAIXA"), MEDIA(1, "MEDIA"), ALTA(2, "ALTA");
 	
 	private Integer codigo;
 	private String descricao;

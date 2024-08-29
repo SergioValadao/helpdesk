@@ -1,13 +1,13 @@
 package com.savsoftware.helpdesk.domain.enums;
 
-public enum Prioriade {
+public enum Prioridade {
 	
-	ADMIN(0, "ROLE_ADMIN"), CLIENTE(1, "ROLE_CLIENTE"), TECNICO(2, "ROLE_TECNICO");
+	BAIXA(0, "BAIXA"), CLIENTE(1, "ROLE_CLIENTE"), TECNICO(2, "ROLE_TECNICO");
 	
 	private Integer codigo;
 	private String descricao;
 	
-	private Prioriade(Integer codigo, String descricao) {
+	private Prioridade(Integer codigo, String descricao) {
 		this.codigo = codigo;
 		this.descricao = descricao;
 	}
@@ -20,11 +20,11 @@ public enum Prioriade {
 		return descricao;
 	}
 	
-	public static Prioriade toEnum(Integer cod) {
+	public static Prioridade toEnum(Integer cod) {
 		if(cod == null ) {
 			return null;
 		}
-		for(Prioriade x : Prioriade.values()) {
+		for(Prioridade x : Prioridade.values()) {
 			if(cod.equals(x.getCodigo())) {
 				return x;
 			}

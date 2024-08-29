@@ -1,30 +1,51 @@
 package com.savsoftware.helpdesk.domain;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.savsoftware.helpdesk.domain.enums.Prioridade;
 import com.savsoftware.helpdesk.domain.enums.Status;
 
-public class Chamados {
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+
+@Entity
+public class Chamados implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+
+	@Id
 	private Integer id;
+	
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataAbertura = LocalDate.now();
+	
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataFechamento;
+	
 	private Prioridade prioridade;
 	private Status status;
 	private String titulo;
 	private String Observacao;
 	
+	@ManyToOne
+	@JoinColumn(name = "Tecnico_id")
 	private Tecnico tecnico;
-	private Chamados cliente;
+	
+	@ManyToOne
+	@JoinColumn(name = "Cliente_id")
+	private Cliente cliente;
 	
 	public Chamados() {
 		super();
 	}
 
 	public Chamados(Integer id, Prioridade prioridade, Status status, String titulo, String observacao, Tecnico tecnico,
-			Chamados cliente) {
+			Cliente cliente) {
 		super();
 		this.id = id;
 		this.prioridade = prioridade;
@@ -35,7 +56,6 @@ public class Chamados {
 		this.cliente = cliente;
 	}
 
-	
 	
 	public Integer getId() {
 		return id;
@@ -101,11 +121,11 @@ public class Chamados {
 		this.tecnico = tecnico;
 	}
 
-	public Chamados getCliente() {
+	public Cliente getCliente() {
 		return cliente;
 	}
 
-	public void setCliente(Chamados cliente) {
+	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
 

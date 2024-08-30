@@ -30,17 +30,17 @@ public class Chamados implements Serializable {
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataFechamento;
 	
-	private Prioridade prioridade;
-	private Status status;
+	private String prioridade;
+	private String status;
 	private String titulo;
 	private String Observacao;
 	
 	@ManyToOne
-	@JoinColumn(name = "Tecnico_id")
+	@JoinColumn(name = "Tecnico")
 	private Tecnico tecnico;
 	
 	@ManyToOne
-	@JoinColumn(name = "Cliente_id")
+	@JoinColumn(name = "Cliente")
 	private Cliente cliente;
 	
 	public Chamados() {
@@ -51,8 +51,8 @@ public class Chamados implements Serializable {
 			Cliente cliente) {
 		super();
 		this.id = id;
-		this.prioridade = prioridade;
-		this.status = status;
+		this.prioridade = prioridade.name();
+		this.status = status.name();
 		this.titulo = titulo;
 		Observacao = observacao;
 		this.tecnico = tecnico;
@@ -84,20 +84,20 @@ public class Chamados implements Serializable {
 		this.dataFechamento = dataFechamento;
 	}
 
-	public Prioridade getPrioridade() {
+	public String getPrioridade() {
 		return prioridade;
 	}
 
 	public void setPrioridade(Prioridade prioridade) {
-		this.prioridade = prioridade;
+		this.prioridade = prioridade.name();
 	}
 
-	public Status getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
 	public void setStatus(Status status) {
-		this.status = status;
+		this.status = status.getDescricao();
 	}
 
 	public String getTitulo() {

@@ -2,7 +2,7 @@ package com.savsoftware.helpdesk.domain.enums;
 
 public enum Status {
 	
-	ADMIN(0, "ABERTO"), ANDAMENTO(1, "ANDAMENTE"), ENCERRADO(2, "ENCERRADO");
+	ABERTO(0, "ABERTO"), ANDAMENTO(1, "ANDAMENTE"), ENCERRADO(2, "ENCERRADO");
 	
 	private Integer codigo;
 	private String descricao;
@@ -20,13 +20,13 @@ public enum Status {
 		return descricao;
 	}
 	
-	public static Status toEnum(Integer cod) {
+	public static String toEnum(Integer cod) {
 		if(cod == null ) {
 			return null;
 		}
 		for(Status x : Status.values()) {
 			if(cod.equals(x.getCodigo())) {
-				return x;
+				return x.getDescricao();
 			}
 		}
 		throw new IllegalArgumentException("Status inválido");

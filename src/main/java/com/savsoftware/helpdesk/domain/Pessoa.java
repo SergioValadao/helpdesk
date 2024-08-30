@@ -37,15 +37,14 @@ public abstract class Pessoa implements Serializable {
 	protected String senha;
 	
 	@ElementCollection(fetch = FetchType.EAGER)
-	@CollectionTable(name = "PERFIS")
-	protected Set<Integer> perfis = new HashSet<>();
+	@CollectionTable(name = "PERFIl")
+	protected Set<Integer> perfil = new HashSet<>();
 	
 	@JsonFormat(pattern = "dd/MM/yyyy")
-	protected LocalDate dataCriacao = LocalDate.now();
+	protected LocalDate datacadastro = LocalDate.now();
 	
 	public Pessoa() {
 		super();
-		addPerfil(Perfil.CLIENTE);
 	}
 
 	public Pessoa(Integer id, String nome, String cpf, String email, String senha) {
@@ -97,20 +96,20 @@ public abstract class Pessoa implements Serializable {
 		this.senha = senha;
 	}
 
-	public Set<Perfil> getPerfis() {
-		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
+	public Set<String> getPerfis() {
+		return perfil.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
 	}
 
-	public void addPerfil(Perfil perfis) {
-		this.perfis.add(perfis.getCodigo());
+	public void addPerfil(Perfil perfil) {
+		this.perfil.add(perfil.getCodigo());
 	}
 
 	public LocalDate getDataCriacao() {
-		return dataCriacao;
+		return datacadastro;
 	}
 
 	public void setDataCriacao(LocalDate data) {
-		this.dataCriacao = data;
+		this.datacadastro = data;
 	}
 
 	@Override

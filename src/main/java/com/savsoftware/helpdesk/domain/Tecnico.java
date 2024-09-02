@@ -1,18 +1,21 @@
 package com.savsoftware.helpdesk.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.savsoftware.helpdesk.domain.enums.Perfil;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 
 @Entity
-public class Tecnico extends Pessoa {
+public class Tecnico extends Pessoa implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
+	@JsonIgnore				//para evitar entrar em loop 
 	@OneToMany(mappedBy = "tecnico")
 	private List<Chamados> chamados = new ArrayList<>();
 

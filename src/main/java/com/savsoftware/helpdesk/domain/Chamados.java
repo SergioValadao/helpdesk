@@ -30,8 +30,8 @@ public class Chamados implements Serializable {
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataFechamento;
 	
-	private String prioridade;
-	private String status;
+	private Prioridade prioridade;
+	private Status status;
 	private String titulo;
 	private String Observacao;
 	
@@ -51,8 +51,8 @@ public class Chamados implements Serializable {
 			Cliente cliente) {
 		super();
 		this.id = id;
-		this.prioridade = prioridade.name();
-		this.status = status.name();
+		this.prioridade = prioridade;
+		this.status = status;
 		this.titulo = titulo;
 		Observacao = observacao;
 		this.tecnico = tecnico;
@@ -84,20 +84,20 @@ public class Chamados implements Serializable {
 		this.dataFechamento = dataFechamento;
 	}
 
-	public String getPrioridade() {
+	public Prioridade getPrioridade() {
 		return prioridade;
 	}
 
 	public void setPrioridade(Prioridade prioridade) {
-		this.prioridade = prioridade.name();
+		this.prioridade = prioridade;
 	}
 
-	public String getStatus() {
+	public Status getStatus() {
 		return status;
 	}
 
 	public void setStatus(Status status) {
-		this.status = status.getDescricao();
+		this.status = status;
 	}
 
 	public String getTitulo() {

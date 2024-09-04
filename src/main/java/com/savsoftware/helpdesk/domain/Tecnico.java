@@ -1,6 +1,5 @@
 package com.savsoftware.helpdesk.domain;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,12 +10,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 
 @Entity
-public class Tecnico extends Pessoa implements Serializable {
+public class Tecnico extends Pessoa {
 
 	private static final long serialVersionUID = 1L;
 	
-	@JsonIgnore				//para evitar entrar em loop 
-	@OneToMany(mappedBy = "tecnico")
+	@JsonIgnore				//para evitar entrar em erro 
+	@OneToMany(mappedBy = "tecnico" )
 	private List<Chamados> chamados = new ArrayList<>();
 
 	public Tecnico() {
@@ -35,6 +34,6 @@ public class Tecnico extends Pessoa implements Serializable {
 
 	public void setChamados(List<Chamados> chamados) {
 		this.chamados = chamados;
-	}	
+	}
 	
 }

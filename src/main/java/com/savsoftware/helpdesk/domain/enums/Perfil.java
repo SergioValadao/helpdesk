@@ -20,13 +20,13 @@ public enum Perfil {
 		return descricao;
 	}
 	
-	public static String toEnum(Integer cod) {
+	public static Perfil toEnum(Integer cod) {
 		if(cod == null ) {
 			return null;
 		}
 		for(Perfil x : Perfil.values()) {
 			if(cod.equals(x.getCodigo())) {
-				return x.getDescricao();
+				return x;
 			}
 		}
 		throw new IllegalArgumentException("prefil inválido");

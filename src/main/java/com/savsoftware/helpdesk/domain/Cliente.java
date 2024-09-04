@@ -1,6 +1,5 @@
 package com.savsoftware.helpdesk.domain;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 
 @Entity
-public class Cliente extends Pessoa implements Serializable {
+public class Cliente extends Pessoa {
 	
 	private static final long serialVersionUID = 1L;
 	

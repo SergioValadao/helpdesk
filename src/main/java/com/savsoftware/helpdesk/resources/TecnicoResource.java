@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.databind.introspect.TypeResolutionContext.Empty;
 import com.savsoftware.helpdesk.domain.Tecnico;
+import com.savsoftware.helpdesk.dtos.TecnicoDTO;
 import com.savsoftware.helpdesk.services.TecnicoService;
 
 @RestController
@@ -19,11 +19,10 @@ public class TecnicoResource {
 	private TecnicoService service;
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Tecnico> findByid(@PathVariable Integer id){
+	public ResponseEntity<TecnicoDTO> findByid(@PathVariable Integer id){
 				
 		Tecnico tec = service.findById(id);
-		return ResponseEntity.ok().body(tec);
-		
+		return ResponseEntity.ok().body(new TecnicoDTO(tec));		
 	}
 
 }

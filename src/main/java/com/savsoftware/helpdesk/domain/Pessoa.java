@@ -104,11 +104,11 @@ public abstract class Pessoa implements Serializable {
 		this.perfil.add(perfil.getCodigo());
 	}
 
-	public LocalDate getDataCriacao() {
+	public LocalDate getDataCadastro() {
 		return datacadastro;
 	}
 
-	public void setDataCriacao(LocalDate data) {
+	public void setDataCadastro(LocalDate data) {
 		this.datacadastro = data;
 	}
 

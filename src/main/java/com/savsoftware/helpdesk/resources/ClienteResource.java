@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.savsoftware.helpdesk.domain.Cliente;
+import com.savsoftware.helpdesk.dtos.ClienteDTO;
 import com.savsoftware.helpdesk.services.ClienteService;
-
 
 @RestController
 @RequestMapping(value = "/clientes")
@@ -19,10 +19,10 @@ public class ClienteResource {
 	private ClienteService service;
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Cliente> getMethodName(@PathVariable Integer id) {
+	public ResponseEntity<ClienteDTO> findByid(@PathVariable Integer id) {
 		
 		Cliente cli = service.findById(id);
-		return ResponseEntity.ok().body(cli);
+		return ResponseEntity.ok().body(new ClienteDTO(cli));
 	}
 	
 

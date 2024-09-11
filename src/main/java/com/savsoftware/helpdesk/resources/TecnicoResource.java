@@ -1,5 +1,8 @@
 package com.savsoftware.helpdesk.resources;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +25,18 @@ public class TecnicoResource {
 	public ResponseEntity<TecnicoDTO> findByid(@PathVariable Integer id){
 				
 		Tecnico tec = service.findById(id);
-		return ResponseEntity.ok().body(new TecnicoDTO(tec));		
+		return ResponseEntity.ok().body(new TecnicoDTO(tec));
 	}
+	
+	@GetMapping(value = "/")
+	public ResponseEntity<List<TecnicoDTO>> AllTecnicos(){
+				
+		List<Tecnico> tec = service.AllTecnicos();
+		List<TecnicoDTO> tecDTO = tec.stream().map(obj -> new TecnicoDTO(obj)).collect(Collectors.toList());
+		
+		return ResponseEntity.ok().body(tecDTO);
+	}
+	
+	
 
 }

@@ -7,11 +7,11 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.savsoftware.helpdesk.domain.Tecnico;
+import com.savsoftware.helpdesk.domain.Cliente;
 import com.savsoftware.helpdesk.domain.enums.Perfil;
 
-public class TecnicoDTO implements Serializable {
-
+public class ClienteDTO implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
 	
 	protected Integer id;
@@ -23,20 +23,21 @@ public class TecnicoDTO implements Serializable {
 	
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	protected LocalDate datacadastro = LocalDate.now();
-	
-	public TecnicoDTO() {
+
+	public ClienteDTO() {
 		super();
 	}
 
-	public TecnicoDTO(Tecnico obj) {
+	public ClienteDTO(Cliente cli) {
 		super();
-		this.id = obj.getId();
-		this.nome = obj.getNome();
-		this.cpf = obj.getCpf();
-		this.email = obj.getEmail();
-		this.senha = obj.getSenha();
-		this.perfil = obj.getPerfil().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());		
-		this.datacadastro = obj.getDataCadastro();
+		this.id = cli.getId();
+		this.nome = cli.getNome();
+		this.cpf = cli.getCpf();
+		this.email = cli.getEmail();
+		this.senha = cli.getSenha();
+		this.perfil = cli.getPerfil().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
+		this.datacadastro = cli.getDataCadastro();
+		
 		
 	}
 
@@ -94,6 +95,5 @@ public class TecnicoDTO implements Serializable {
 
 	public void setDatacadastro(LocalDate datacadastro) {
 		this.datacadastro = datacadastro;
-	}
-		
+	}		
 }

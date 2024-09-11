@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.savsoftware.helpdesk.domain.Cliente;
 import com.savsoftware.helpdesk.repositories.ClienteRepository;
+import com.savsoftware.helpdesk.services.Exception.ObjectNotFoundException;
 
 @Service
 public class ClienteService {
@@ -17,8 +18,7 @@ public class ClienteService {
 	public Cliente findById(Integer id) {
 		
 		Optional<Cliente> cli = repository.findById(id);
-		return cli.orElse(null);
-		
+		return cli.orElseThrow(() -> new ObjectNotFoundException("Registro " + id + "não encontrado!" ));		
 	}
 
 }

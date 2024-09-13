@@ -46,7 +46,7 @@ public class TecnicoService {
 		
 	}
 
-	private void ValidarPessoa(TecnicoDTO tecDTO) {
+	public void ValidarPessoa(TecnicoDTO tecDTO) {
 
 		Optional<Pessoa> p = pessoarepository.findByCpf(tecDTO.getCpf());
 		

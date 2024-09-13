@@ -9,6 +9,6 @@ import com.savsoftware.helpdesk.domain.Pessoa;
 public interface PessoaRepository extends JpaRepository<Pessoa, Integer> {
 
 	Optional<Pessoa> findByCpf(String cpf);
-	Optional<Pessoa> findByEmail(String email);
+	Optional<Pessoa> findByEmail(String email);	
 	
 }

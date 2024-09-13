@@ -10,15 +10,22 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.savsoftware.helpdesk.domain.Cliente;
 import com.savsoftware.helpdesk.domain.enums.Perfil;
 
+import jakarta.validation.constraints.NotNull;
+
 public class ClienteDTO implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
 	protected Integer id;
-	protected String nome;	
+	@NotNull(message = "Necessario informar o nome!")
+	protected String nome;
+	@NotNull(message = "Necessario informar o CPF!")
 	protected String cpf;
+	@NotNull(message = "Necessario informar o email!")
 	protected String email;
-	protected String senha;		
+	@NotNull(message = "Necessario informar a senha!")
+	protected String senha;
+	
 	protected Set<Integer> perfil = new HashSet<>();	
 	
 	@JsonFormat(pattern = "dd/MM/yyyy")
@@ -36,9 +43,7 @@ public class ClienteDTO implements Serializable {
 		this.email = cli.getEmail();
 		this.senha = cli.getSenha();
 		this.perfil = cli.getPerfil().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
-		this.datacadastro = cli.getDataCadastro();
-		
-		
+		this.datacadastro = cli.getDataCadastro();			
 	}
 
 	public Integer getId() {

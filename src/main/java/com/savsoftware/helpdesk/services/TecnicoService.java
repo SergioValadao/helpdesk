@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.savsoftware.helpdesk.domain.Pessoa;
@@ -13,6 +14,8 @@ import com.savsoftware.helpdesk.repositories.PessoaRepository;
 import com.savsoftware.helpdesk.repositories.TecnicoRepository;
 import com.savsoftware.helpdesk.services.Exception.DataIntregrityViolationException;
 import com.savsoftware.helpdesk.services.Exception.ObjectNotFoundException;
+
+import jakarta.validation.Valid;
 
 @Service
 public class TecnicoService {
@@ -60,6 +63,24 @@ public class TecnicoService {
 			throw new DataIntregrityViolationException("Email já cadastrado no sistema!");
 		}
 		
+	}
+
+	public Tecnico Update(Integer id, @Valid TecnicoDTO obj) {
+		
+		obj.setId(id);
+		Tecnico tec = findById(id);
+		ValidarPessoa(obj);
+		tec = new Tecnico(obj);
+		return repository.save(tec);
+	}
+	
+	public void Delete(Integer id) {
+		
+		Tecnico tec = findById(id);		
+		if(tec.getChamados().size() > 0 ) {
+			throw new DataIntegrityViolationException("Existe chamados para este técnico!"); 
+		}
+		repository.delete(tec);					
 	}
 
 }

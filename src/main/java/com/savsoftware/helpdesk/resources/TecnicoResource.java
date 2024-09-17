@@ -6,9 +6,11 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -52,5 +54,21 @@ public class TecnicoResource {
 		
 	}
 	
+	@PutMapping(value = "/{id}")
+	public ResponseEntity<TecnicoDTO> update(@PathVariable Integer id, @Valid @RequestBody TecnicoDTO obj){
+		
+		Tecnico tec = service.Update(id, obj);		
+		return ResponseEntity.ok().body(new TecnicoDTO(tec));
+		
+	}
+	
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<TecnicoDTO> delete(@PathVariable Integer id){
+		
+		Tecnico tec = service.findById(id);
+		service.Delete(id);		
+		return ResponseEntity.ok().body(new TecnicoDTO(tec));
+		
+	}
 
 }

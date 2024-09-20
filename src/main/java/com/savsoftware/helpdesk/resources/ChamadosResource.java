@@ -52,8 +52,7 @@ public class ChamadosResource  {
 		Chamados obj = service.create(chamadoDTO);
 		//URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/{id}").buildAndExpand(obj.getId()).toUri();		
 		//return ResponseEntity.created(uri).build();
-		return ResponseEntity.ok().body(new ChamadosDTO(obj));
-		
+		return ResponseEntity.ok().body(new ChamadosDTO(obj));		
 		
 	}
 	

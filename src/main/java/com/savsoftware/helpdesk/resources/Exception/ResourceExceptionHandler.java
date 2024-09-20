@@ -8,7 +8,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.savsoftware.helpdesk.services.Exception.DataIntregrityViolationException;
+import com.savsoftware.helpdesk.services.Exception.DataIntegrityViolationException;
 import com.savsoftware.helpdesk.services.Exception.ObjectNotFoundException;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,12 +24,13 @@ public class ResourceExceptionHandler {
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
 	}
 	
-	@ExceptionHandler(DataIntregrityViolationException.class)
-	public ResponseEntity<StandardError> dataIntregrityViolationException(DataIntregrityViolationException ex, HttpServletRequest request){
+	@ExceptionHandler(DataIntegrityViolationException.class)
+	public ResponseEntity<StandardError> StandardErrors(DataIntegrityViolationException ex, HttpServletRequest request){
 		
-		StandardError error = new StandardError(System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(), "Violação de dados", ex.getMessage(), request.getRequestURI());
-	
+		StandardError error = new StandardError(System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(), "Violação de dados", ex.getMessage() ,  request.getRequestURI());		
+		
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+		
 	}
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)

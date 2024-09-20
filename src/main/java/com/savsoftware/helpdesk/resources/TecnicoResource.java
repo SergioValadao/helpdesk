@@ -66,7 +66,8 @@ public class TecnicoResource {
 	public ResponseEntity<TecnicoDTO> delete(@PathVariable Integer id){
 		
 		Tecnico tec = service.findById(id);
-		service.Delete(id);		
+		service.Delete(id);
+		//return ResponseEntity.noContent().build();
 		return ResponseEntity.ok().body(new TecnicoDTO(tec));
 		
 	}

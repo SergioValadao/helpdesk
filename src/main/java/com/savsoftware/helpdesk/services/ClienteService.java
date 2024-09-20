@@ -12,7 +12,6 @@ import com.savsoftware.helpdesk.domain.Pessoa;
 import com.savsoftware.helpdesk.dtos.ClienteDTO;
 import com.savsoftware.helpdesk.repositories.ClienteRepository;
 import com.savsoftware.helpdesk.repositories.PessoaRepository;
-import com.savsoftware.helpdesk.services.Exception.DataIntregrityViolationException;
 import com.savsoftware.helpdesk.services.Exception.ObjectNotFoundException;
 
 import jakarta.validation.Valid;
@@ -54,13 +53,13 @@ public class ClienteService {
 		Optional<Pessoa> pessoa = pessoarepository.findByCpf(obj.getCpf());
 		
 		if(pessoa.isPresent() && pessoa.get().getId() != obj.getId()) {
-			throw new DataIntregrityViolationException("CPF já cadastrado no sistema!");  
+			throw new DataIntegrityViolationException("CPF já cadastrado no sistema!");  
 		}
 		
 		pessoa = pessoarepository.findByEmail(obj.getEmail());
 		
 		if(pessoa.isPresent() && pessoa.get().getId() != obj.getId()) {
-			throw new DataIntregrityViolationException("Email já cadastrado no sistema!");
+			throw new DataIntegrityViolationException("Email já cadastrado no sistema!");
 		}
 				
 	}

@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.savsoftware.helpdesk.domain.Pessoa;
@@ -25,6 +26,8 @@ public class TecnicoService {
 	@Autowired
 	private PessoaRepository pessoarepository;
 	
+	@Autowired
+	private BCryptPasswordEncoder encoder;
 	
 	public Tecnico findById(Integer id) {
 				
@@ -41,7 +44,7 @@ public class TecnicoService {
 	public Tecnico create(TecnicoDTO tecDTO) {
 		
 		tecDTO.setId(null);		
-		
+		tecDTO.setSenha(encoder.encode(tecDTO.getSenha()));
 		ValidarPessoa(tecDTO);
 		Tecnico tecObj = new Tecnico(tecDTO);
 		return repository.save(tecObj);		

@@ -59,35 +59,42 @@ public class ChamadosServices {
 		return repository.save(cha);
 	}
 
-	public Chamados delete(Integer id) {		
-		Chamados chamado = findById(id);
+	public void delete(Integer id) {
+		
+		Optional<Chamados> chamado = repository.findById(id);
+		
 		if(chamado.equals(null)) {
-			throw new DataIntegrityViolationException("Registro não encontrado para exclusão! Verifique");
+			throw new DataIntegrityViolationException("Chamado não encontrado para exclusão! Verifique");
 		}
-		repository.delete(chamado);		
-		return chamado;		
+		if(!chamado.get().getStatus().getCodigo().equals(2)) {
+			throw new DataIntegrityViolationException("Somente Chamado com status encerrado pode ser excluido! Verifique");
+		}
+		repository.deleteById(id);
+			
 	}
 
 	public Chamados update(Integer id, ChamadosDTO chaDTO) {		
 		chaDTO.setId(id);
-		Chamados cha = findById(id);
-		if(chaDTO.getStatus().equals(2)) {
-			cha.setDataFechamento(LocalDate.now());
-		}
-
+		Optional<Chamados> cha = repository.findById(id);
+		
 		if(cha.equals(null)) {
 			throw new DataIntegrityViolationException("Registro não encontrado para exclusão! Verifique.");
 		}
+		
+		if(chaDTO.getStatus().equals(2)) {
+			cha.get().setDataFechamento(LocalDate.now());
+		}
+		
 		Cliente cli = clienteService.findById(chaDTO.getCliente());
 		Tecnico tec = tecnicoService.findById(chaDTO.getTecnico());
 		
-		cha.setCliente(cli);
-		cha.setTecnico(tec);
+		cha.get().setCliente(cli);
+		cha.get().setTecnico(tec);
 		
-		cha.setObservacao(chaDTO.getObservacao());
-		cha.setPrioridade(Prioridade.toEnum(chaDTO.getPrioridade()));
-		cha.setStatus(Status.toEnum(chaDTO.getStatus()));
-		cha.setTitulo(chaDTO.getTitulo());
-		return repository.save(cha);		
+		cha.get().setObservacao(chaDTO.getObservacao());
+		cha.get().setPrioridade(Prioridade.toEnum(chaDTO.getPrioridade()));
+		cha.get().setStatus(Status.toEnum(chaDTO.getStatus()));
+		cha.get().setTitulo(chaDTO.getTitulo());
+		return repository.save(cha.get());		
 	}	
 }

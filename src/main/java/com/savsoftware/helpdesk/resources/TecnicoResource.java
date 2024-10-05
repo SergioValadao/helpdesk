@@ -1,6 +1,5 @@
 package com.savsoftware.helpdesk.resources;
 
-import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.savsoftware.helpdesk.domain.Tecnico;
 import com.savsoftware.helpdesk.dtos.TecnicoDTO;
@@ -49,8 +47,9 @@ public class TecnicoResource {
 	public ResponseEntity<TecnicoDTO> create(@Valid @RequestBody TecnicoDTO tecDTO){
 		
 		Tecnico newtec = service.create(tecDTO);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newtec.getId()).toUri();
-		return ResponseEntity.created(uri).build();
+		//URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newtec.getId()).toUri();
+		//return ResponseEntity.created(uri).build();
+		return ResponseEntity.ok().body(new TecnicoDTO(newtec));
 		
 	}
 	

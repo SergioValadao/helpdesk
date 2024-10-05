@@ -42,7 +42,7 @@ public class ChamadosResource  {
 		
 		List<Chamados> lista = service.findAll();
 		
-		List<ChamadosDTO> listaDTO = lista.stream().map(x -> new ChamadosDTO(x)).collect(Collectors.toList());
+		List<ChamadosDTO> listaDTO = lista.stream().map(x -> new ChamadosDTO(x)).collect(Collectors.toList());		
 		return ResponseEntity.ok().body(listaDTO);		
 	}
 
@@ -59,8 +59,10 @@ public class ChamadosResource  {
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<ChamadosDTO> delete(@PathVariable Integer id){
 		
-		Chamados cha = service.delete(id);
+		Chamados cha = service.findById(id);
+		service.delete(id);		
 		return ResponseEntity.ok().body(new ChamadosDTO(cha));
+		
 	}
 	
 	@PutMapping (value = "/{id}")
